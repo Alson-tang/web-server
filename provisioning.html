@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入图标和页面css文件 -->
+    <title>LOGIN</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #66aafe;
+            text-align: center;
+        }
+
+        .image img {
+            /*实现图片自适应屏幕大小*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
+        .login {
+            width: 400px;
+            /* background-color: rgba(41, 45, 62, 0.7); */
+            background-color: white;
+            color: aliceblue;
+            border-radius: 8px;
+            padding: 50px;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+        }
+
+        .login .header {
+            text-align: center;
+            font-size: 30px;
+            line-height: 100px;
+        }
+
+        .login .input input {
+            background-color: rgb(41, 45, 62);
+            border: 0px;
+            width: 100%;
+            text-align: center;
+            font-size: 15px;
+            color: aliceblue;
+            outline: none;
+        }
+
+        .login .input input::placeholder {
+            text-transform: uppercase;
+        }
+
+        .login .input-border {
+            /*实现颜色从左到右渐变效果*/
+            background-image: linear-gradient(to right, #e8198b, #3B65BB);
+            height: 45px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .3s;
+        }
+
+        .login .input-border .border {
+            /*这里使用了css3的calc()方法用于自动计算宽高*/
+            height: calc(100% - 4px);
+            width: calc(100% - 4px);
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .login .btn-cnt {
+            width: 60%;
+            border: 2px solid #3B65BB;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 40px;
+            text-transform: uppercase;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .login .btn-cnt:hover {
+            background-color: #3B65BB;
+        }
+
+        .login .icon {
+            text-align: center;
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 18px;
+            border-top: 1px dashed #eee;
+            padding-top: 13px;
+        }
+
+        .login .icon i {
+            font-size: 18px;
+            color: rgb(187, 187, 187);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body id="id_web_server">
+    <div class="login" id="id_login">
+        <div class="header">
+            Web Server
+        </div>
+        <div class="input">
+            <div class="input-border">
+                <input id="ssid" type="ssid" class="border" name="ssid" placeholder="SSID">
+            </div>
+            <div class="input-border">
+                <input id="password" type="password" class="border" name="password" placeholder="PASSWORD">
+            </div>
+        </div>
+        <div class="action">
+            <div onclick="postData()" class="btn-cnt">
+                Connect
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const constPromptInfo = {
+            enterSsid: { zh: "请输入 SSID", en: "Please enter SSID" }
+        };
+
+        function getPrompt(a) {
+            var f = constPromptInfo[a]["en"];
+            console.table(f);
+            return constPromptInfo[a]["en"];
+        }
+
+        function showMessage(f, h) {
+            var e = document.getElementById("id_web_server");
+            var g = document.createElement("div");
+            g.innerHTML = '<div class="content">' + f + "</div>";
+            g.setAttribute("class", "msg");
+            e.appendChild(g);
+            if (h) {
+                setTimeout(function () {
+                    e.removeChild(g);
+                }, h);
+            }
+        }
+
+        function postData() {
+            var f = document.getElementById("ssid").value;
+            if ((f == "") || (f == null)) {
+                showMessage(getPrompt("enterSsid"), 5000);
+                return false;
+            }
+            console.table(f);
+        }
+    </script>
+</body>
+
+</html>
